@@ -1,0 +1,254 @@
+"use client";
+
+import { Layout, Menu, Spin } from "antd";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useState } from "react";
+import Button from "@/components/utils/Button";
+import { usePathname, useRouter } from "next/navigation";
+import styles from "./sidebar.module.css";
+import Icon, { IconState } from "@/components/utils/Icon";
+
+type Props = {
+  children: React.ReactNode;
+};
+
+type MenusProps = {
+  syskey: string;
+  name: string;
+  router: string;
+  icon: string;
+  submenu: SubMenusProps[] | null;
+};
+
+type SubMenusProps = {
+  syskey: string;
+  name: string;
+  router: string;
+  icon: string;
+};
+
+const menus: MenusProps[] = [
+  {
+    syskey: "1",
+    name: "Dashboard",
+    router: "/",
+    icon: "dashboard",
+    submenu: null,
+  },
+  {
+    syskey: "2",
+    name: "Products",
+    router: "/products",
+    icon: "products",
+    submenu: [
+      {
+        syskey: "2-1",
+        name: "All Products",
+        router: "/",
+        icon: "products",
+      },
+      {
+        syskey: "2-2",
+        name: "Categories",
+        router: "/products/categories",
+        icon: "categories",
+      },
+    ],
+  },
+  {
+    syskey: "3",
+    name: "Settings",
+    router: "/settings",
+    icon: "setting",
+    submenu: [
+      {
+        syskey: "3-1",
+        name: "Profile",
+        router: "/settings/profile",
+        icon: "profile",
+      },
+      {
+        syskey: "3-2",
+        name: "Security",
+        router: "/settings/security",
+        icon: "security",
+      },
+    ],
+  },
+  {
+    syskey: "4",
+    name: "Reports",
+    router: "/reports",
+    icon: "reports",
+    submenu: null,
+  },
+  {
+    syskey: "5",
+    name: "Usage",
+    router: "/usage",
+    icon: "usage",
+    submenu: [
+      {
+        syskey: "5-1",
+        name: "Statistics",
+        router: "/usage/statistics",
+        icon: "BarChartOutlined",
+      },
+    ],
+  },
+];
+
+const { SubMenu } = Menu;
+
+const Container = ({ children }: Props) => {
+  const [collapsed, setCollapsed] = useState(true);
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
+
+  const pathname = usePathname();
+
+  const isParentMenuActive = (menu: MenusProps) => {
+    if (!menu.submenu) return false;
+    return menu.submenu.some((submenu) => pathname === submenu.router);
+  };
+
+  return (
+    <>
+      <div className={styles.container}>
+        <div className={styles.topNavigation}>
+          <div className=" flex items-center">
+            <Button
+              btnType="primary"
+              btnLabel=""
+              htmlType="button"
+              handleClick={toggleCollapsed}
+              btnStyles={`${
+                collapsed ? styles.displayBlock : styles.displayHidden
+              } ${styles.btnStyle}`}
+              btnIcon={
+                collapsed ? (
+                  <Icon name={IconState.UnfoldMenu} />
+                ) : (
+                  <Icon name={IconState.FoldMenu} />
+                )
+              }
+            />
+
+            <Button
+              btnType="primary"
+              btnLabel="Logout"
+              htmlType="button"
+              btnStyles=" absolute mt-2 right-2"
+              handleClick={() => console.log("Logout")}
+              btnIcon={<Icon name={IconState.Logout} />}
+            />
+          </div>
+        </div>
+
+        <div className={styles.body}>
+          <div className={styles.sidebar}>
+            <div className={styles.logo}>
+              <Image
+                src="/logo.png"
+                width={35}
+                height={35}
+                alt="ListenYourBody"
+                className=" rounded-full"
+                priority={true}
+              />
+              <h1
+                className={` ${styles.title} ${
+                  collapsed ? styles.displayHidden : styles.displayBlock
+                }`}
+              >
+                Admin Panel
+              </h1>
+              <Button
+                btnType="primary"
+                btnLabel=""
+                htmlType="button"
+                handleClick={toggleCollapsed}
+                btnStyles={`${
+                  collapsed ? styles.displayHidden : styles.displayBlock
+                } ${styles.customBtn}`}
+                btnIcon={
+                  collapsed ? (
+                    <Icon name={IconState.UnfoldMenu} />
+                  ) : (
+                    <Icon name={IconState.FoldMenu} />
+                  )
+                }
+              />
+            </div>
+            <Menu
+              theme="dark"
+              inlineCollapsed={collapsed}
+              className={` ${styles.menu} ${collapsed ? "w-16" : "w-48"} `}
+              mode="inline"
+            >
+              {menus.map((menu) =>
+                menu.submenu ? (
+                  <SubMenu
+                    key={menu.syskey}
+                    title={
+                      <span
+                        className={`flex ${
+                          isParentMenuActive(menu) ? "text-default" : ""
+                        }`}
+                      >
+                        <Icon name={menu.icon} />
+                        <span
+                          className={`${collapsed ? "hidden" : ""} text-sm`}
+                        >
+                          {menu.name}
+                        </span>
+                      </span>
+                    }
+                  >
+                    {menu.submenu.map((submenu) => (
+                      <Link
+                        href={submenu.router}
+                        key={submenu.syskey}
+                        className={`flex justify-start py-2.5 pl-7 my-1.5 rounded-lg mx-2 text-xs ${
+                          pathname === submenu.router ? "bg-default" : ""
+                        }`}
+                      >
+                        <div className="flex gap-2">
+                          <Icon name={submenu.icon} />
+                          <span className={"text-sm"}>{submenu.name}</span>
+                        </div>
+                      </Link>
+                    ))}
+                  </SubMenu>
+                ) : (
+                  <div
+                    key={menu.syskey}
+                    className={`my-1 ${collapsed ? "px-0.5" : "pl-2.5"} ${
+                      pathname === menu.router ? "bg-default rounded-lg" : ""
+                    }`}
+                  >
+                    <Link
+                      href={menu.router}
+                      className={`gap-2 flex px-5 justify-start py-3 `}
+                    >
+                      <Icon name={menu.icon} />
+                      <span className={`${collapsed ? "hidden" : ""} text-sm`}>
+                        {menu.name}
+                      </span>
+                    </Link>
+                  </div>
+                )
+              )}
+            </Menu>
+          </div>
+
+          <div className={styles.children}>{children}</div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Container;

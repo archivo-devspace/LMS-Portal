@@ -1,0 +1,47 @@
+.container {
+   @apply h-screen relative flex flex-col 
+}
+
+.topNavigation {
+   @apply  p-0 h-12  w-full fixed shadow-md
+}
+
+.displayHidden {
+    @apply hidden;
+}
+
+.displayBlock {
+    @apply block
+}
+
+.btnStyle {
+   @apply  ml-[74px] mt-2 bg-default w-5 h-7 flex justify-center items-center
+}
+
+.body {
+    @apply h-screen w-full flex
+}
+
+.sidebar {
+    @apply relative flex flex-col
+}
+
+.logo {
+    @apply h-12 bg-primary flex justify-center gap-3.5 items-center pr-1 rounded-tr-lg
+}
+
+.title {
+    @apply text-xs font-semibold truncate 
+}
+
+.customBtn{
+    @apply mt-1 bg-default w-5 h-7  justify-center items-center
+}
+
+.menu {
+    @apply h-screen static   rounded-br-lg pt-2
+}
+
+.children{
+    @apply mx-2.5  mb-2  mt-[58px] w-full  overflow-auto shadow-md rounded-lg px-2
+}
