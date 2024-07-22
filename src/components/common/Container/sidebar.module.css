@@ -23,11 +23,15 @@
 }
 
 .sidebar {
-    @apply relative flex flex-col
+    @apply relative flex flex-col 
 }
 
-.logo {
-    @apply h-12 bg-primary flex justify-center gap-3.5 items-center pr-1 rounded-tr-lg
+/* .logo {
+    @apply h-14 relative shadow-md bg-primary flex justify-center gap-4 items-center pr-1 rounded-tr-lg border-r-[1px] border-gray-300
+} */
+
+.logo{
+    @apply w-full flex justify-center shadow-md gap-4 bg-darkGrey items-center absolute h-12 rounded-tr-lg border-r-[1px] border-gray-200
 }
 
 .title {
@@ -39,9 +43,11 @@
 }
 
 .menu {
-    @apply h-screen static   rounded-br-lg pt-2
+    @apply h-screen static overflow-y-auto overflow-x-hidden my-12
 }
 
 .children{
-    @apply mx-2.5  mb-2  mt-[58px] w-full  overflow-auto shadow-md rounded-lg px-2
+    @apply mx-2.5  mb-2  mt-[95px] w-full  overflow-auto shadow-md rounded-lg px-2 ;
+    
+
 }

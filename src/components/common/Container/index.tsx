@@ -1,6 +1,6 @@
 "use client";
 
-import { Layout, Menu, Spin } from "antd";
+import { Breadcrumb, Divider, Layout, Menu, Spin } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -45,13 +45,13 @@ const menus: MenusProps[] = [
       {
         syskey: "2-1",
         name: "All Products",
-        router: "/",
+        router: "/products",
         icon: "products",
       },
       {
         syskey: "2-2",
         name: "Categories",
-        router: "/products/categories",
+        router: "/categories",
         icon: "categories",
       },
     ],
@@ -65,13 +65,13 @@ const menus: MenusProps[] = [
       {
         syskey: "3-1",
         name: "Profile",
-        router: "/settings/profile",
+        router: "/profile",
         icon: "profile",
       },
       {
         syskey: "3-2",
         name: "Security",
-        router: "/settings/security",
+        router: "/security",
         icon: "security",
       },
     ],
@@ -118,33 +118,27 @@ const Container = ({ children }: Props) => {
     <>
       <div className={styles.container}>
         <div className={styles.topNavigation}>
-          <div className=" flex items-center">
-            <Button
-              btnType="primary"
-              btnLabel=""
-              htmlType="button"
-              handleClick={toggleCollapsed}
-              btnStyles={`${
-                collapsed ? styles.displayBlock : styles.displayHidden
-              } ${styles.btnStyle}`}
-              btnIcon={
-                collapsed ? (
-                  <Icon name={IconState.UnfoldMenu} />
-                ) : (
-                  <Icon name={IconState.FoldMenu} />
-                )
-              }
-            />
-
+          <div className=" flex items-center ">
             <Button
               btnType="primary"
               btnLabel="Logout"
               htmlType="button"
-              btnStyles=" absolute mt-2 right-2"
+              btnStyles=" absolute top-2 right-2"
               handleClick={() => console.log("Logout")}
               btnIcon={<Icon name={IconState.Logout} />}
             />
           </div>
+        </div>
+        <div
+          className={`h-8 mt-[52px]  w-full fixed  ${
+            collapsed ? "pl-20" : "pl-52 ease-out"
+          } bg-white  `}
+        >
+          <Breadcrumb style={{ margin: "8px 4px" }}>
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>List</Breadcrumb.Item>
+            <Breadcrumb.Item>App</Breadcrumb.Item>
+          </Breadcrumb>
         </div>
 
         <div className={styles.body}>
@@ -152,8 +146,8 @@ const Container = ({ children }: Props) => {
             <div className={styles.logo}>
               <Image
                 src="/logo.png"
-                width={35}
-                height={35}
+                width={40}
+                height={40}
                 alt="ListenYourBody"
                 className=" rounded-full"
                 priority={true}
@@ -165,25 +159,8 @@ const Container = ({ children }: Props) => {
               >
                 Admin Panel
               </h1>
-              <Button
-                btnType="primary"
-                btnLabel=""
-                htmlType="button"
-                handleClick={toggleCollapsed}
-                btnStyles={`${
-                  collapsed ? styles.displayHidden : styles.displayBlock
-                } ${styles.customBtn}`}
-                btnIcon={
-                  collapsed ? (
-                    <Icon name={IconState.UnfoldMenu} />
-                  ) : (
-                    <Icon name={IconState.FoldMenu} />
-                  )
-                }
-              />
             </div>
             <Menu
-              theme="dark"
               inlineCollapsed={collapsed}
               className={` ${styles.menu} ${collapsed ? "w-16" : "w-48"} `}
               mode="inline"
@@ -242,6 +219,13 @@ const Container = ({ children }: Props) => {
                 )
               )}
             </Menu>
+            <div className=" bottom-0 w-full flex justify-center bg-darkGrey text-white  items-center absolute h-12 rounded-br-lg  border-r-[1px] border-gray-200">
+              {collapsed ? (
+                <Icon name={IconState.Right} onClick={toggleCollapsed} />
+              ) : (
+                <Icon name={IconState.Left} onClick={toggleCollapsed} />
+              )}
+            </div>
           </div>
 
           <div className={styles.children}>{children}</div>

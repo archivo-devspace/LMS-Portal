@@ -12,12 +12,15 @@ import {
   DatabaseOutlined,
   PieChartOutlined,
   BarChartOutlined,
+  RightOutlined,
+  LeftOutlined,
 } from "@ant-design/icons";
 
 import React from "react";
 
 type IconProps = {
   name: IconState | string;
+  onClick?: () => void;
 };
 
 export enum IconState {
@@ -34,37 +37,42 @@ export enum IconState {
   Reports = "reports",
   Usage = "usage",
   Statistics = "statistics",
+  Right = "right",
+  Left = "left",
 }
 
-const Icon = ({ name }: IconProps) => {
+const Icon = ({ name, onClick }: IconProps) => {
   switch (name) {
     case IconState.Dashboard:
-      return <HomeOutlined />;
+      return <HomeOutlined onClick={onClick} />;
     case IconState.Categories:
-      return <ContainerOutlined />;
+      return <ContainerOutlined onClick={onClick} />;
     case IconState.Products:
-      return <InboxOutlined />;
+      return <InboxOutlined onClick={onClick} />;
     case IconState.Setting:
-      return <SettingOutlined />;
+      return <SettingOutlined onClick={onClick} />;
     case IconState.SampleUsage:
-      return <AlertOutlined />;
+      return <AlertOutlined onClick={onClick} />;
     case IconState.UnfoldMenu:
-      return <MenuUnfoldOutlined />;
+      return <MenuUnfoldOutlined onClick={onClick} />;
     case IconState.FoldMenu:
-      return <MenuFoldOutlined />;
+      return <MenuFoldOutlined onClick={onClick} />;
     case IconState.Logout:
-      return <LogoutOutlined />;
+      return <LogoutOutlined onClick={onClick} />;
     case IconState.Profile:
-      return <UserOutlined />;
+      return <UserOutlined onClick={onClick} />;
     case IconState.Security:
-      return <SecurityScanOutlined />;
+      return <SecurityScanOutlined onClick={onClick} />;
     case IconState.Reports:
-      return <DatabaseOutlined />;
+      return <DatabaseOutlined onClick={onClick} />;
     case IconState.Usage:
-      return <PieChartOutlined />;
+      return <PieChartOutlined onClick={onClick} />;
     case IconState.Statistics:
-      return <BarChartOutlined />;
-    default:
+      return <BarChartOutlined onClick={onClick} />;
+    case IconState.Right:
+      return <RightOutlined onClick={onClick} />;
+    case IconState.Left:
+      return <LeftOutlined onClick={onClick} />;
       return null;
   }
 };
