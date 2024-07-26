@@ -3,7 +3,20 @@
 }
 
 .topNavigation {
-   @apply  p-0 h-12  w-full fixed shadow-md
+   @apply  p-0 h-12  w-full fixed shadow-md ;
+    background-color: var(--primary_strong-color);
+    transition: 1s all ease;
+}
+
+.breadcrumb{
+    color: var(--text-color);
+    background-color: var(--primary-color);
+    transition: 1s all ease;
+    }
+
+.active_breadcrumb {
+            color: var(--active-color);
+            
 }
 
 .displayHidden {
@@ -15,11 +28,14 @@
 }
 
 .btnStyle {
-   @apply  ml-[74px] mt-2 bg-default w-5 h-7 flex justify-center items-center
+   @apply  ml-[74px] mt-2  w-5 h-7 flex justify-center items-center;
+    background-color: var(--active-color);
 }
 
 .body {
-    @apply h-screen w-full flex
+    @apply h-screen w-full flex;
+    background-color: var(--primary-color);
+    transition: 1s all ease;
 }
 
 .sidebar {
@@ -31,7 +47,10 @@
 } */
 
 .logo{
-    @apply w-full flex justify-center shadow-md gap-4 bg-darkGrey items-center absolute h-12 rounded-tr-lg border-r-[1px] border-gray-200
+    @apply w-full flex justify-center shadow-md gap-4 items-center absolute h-12 rounded-tr-lg border-r-[1px];
+    border-color: var(--active-color);
+    background-color: var(--primary-color);
+    transition: 1s all ease;
 }
 
 .title {
@@ -39,15 +58,65 @@
 }
 
 .customBtn{
-    @apply mt-1 bg-default w-5 h-7  justify-center items-center
+    @apply mt-1  w-5 h-7  justify-center items-center;
+    background-color: var(--active-color);
+     transition: 1s all ease;
 }
 
 .menu {
-    @apply h-screen static overflow-y-auto overflow-x-hidden my-12
+    @apply h-screen relative overflow-y-auto overflow-x-hidden my-12;
+    background-color: var(--primary_strong-color);
+  
+            transition: 0.7s all ease;
+        
+    
 }
+
+
 
 .children{
     @apply mx-2.5  mb-2  mt-[95px] w-full  overflow-auto shadow-md rounded-lg px-2 ;
+    background-color: var(--primary_weak-color);
     
+  transition: 1s all ease;
 
+}
+
+.sidebar_footer{
+    @apply bottom-0 w-full flex justify-center  text-white items-center absolute h-12 rounded-br-lg border-r-[1px];
+    border-color: var(--active-color);
+    background-color: var(--primary-color);
+     transition: 1s all ease;
+}
+
+.submenu {
+    @apply py-1 border-r-[1.5px];
+    border-color:var(--primary_strong-color); ;
+    background-color: var(--primary-color);
+     transition: 1s all ease;
+
+    }
+
+.active_text {
+    color: var(--active-color);
+}
+
+.active_bg {
+    background-color: var(--active-color);
+}
+
+.text {
+    color: var(--text-color);
+}
+
+.text_dark {
+    color: var(--primary_weak-color);
+}
+
+.submenu_link_hover:hover {
+    color: var(--active-color);
+}
+
+.active_submenu_link_hover:hover {
+    color: var(--text-color);
 }

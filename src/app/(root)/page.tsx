@@ -1,9 +1,12 @@
 // import Button from '@/components/utils/Button';
 "use client";
+
+import styles from "./styles.module.css";
+
 export default function Home() {
   return (
     <>
-      <div className=" p-2 text-justify">
+      <div className={styles.container}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam debitis
         voluptates, molestias iste voluptatibus quidem veniam officia laborum
         recusandae eveniet soluta necessitatibus minus quia labore tempora vel.

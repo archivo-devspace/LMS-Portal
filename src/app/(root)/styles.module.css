@@ -1,0 +1,4 @@
+.container{
+    @apply py-2 text-justify;
+ color: var(--text-color);
+}

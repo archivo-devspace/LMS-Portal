@@ -17,7 +17,7 @@ const config: Config = {
         primary: "#151523",
         secondary: "#23243a",
         light:"#FFFFFF",
-        default: "rgb(22 119 255)",
+        default: "fff",
         success: "#00a854",
         danger: "#ff4d4f",
         warnning: "#ffbf00",
