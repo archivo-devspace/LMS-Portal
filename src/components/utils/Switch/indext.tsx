@@ -1,5 +1,7 @@
 import React from "react";
-import { Switch as AntdSwitch } from "antd";
+import { Switch as AntdSwitch, ConfigProvider } from "antd";
+import { useThemeContext } from "@/contexts/ThemeContext";
+import { Colors } from "@/theme";
 
 interface Props {
   onHandleSwitch: (checked: boolean) => void;
@@ -7,7 +9,20 @@ interface Props {
 }
 
 const Switch = ({ onHandleSwitch, value }: Props) => {
-  return <AntdSwitch value={value} onChange={onHandleSwitch} />;
+  const { theme } = useThemeContext();
+  const color = Colors[theme];
+
+  return (
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: color.active,
+        },
+      }}
+    >
+      <AntdSwitch value={value} onChange={onHandleSwitch} />
+    </ConfigProvider>
+  );
 };
 
 export default Switch;

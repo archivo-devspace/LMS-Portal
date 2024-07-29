@@ -1,11 +1,13 @@
 // import Button from '@/components/utils/Button';
 "use client";
 
+import Button from "@/components/utils/Button";
 import styles from "./styles.module.css";
 
 export default function Home() {
   return (
     <>
+      <Button btnType="primary" btnLabel="Testing" htmlType="button" />
       <div className={styles.container}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam debitis
         voluptates, molestias iste voluptatibus quidem veniam officia laborum

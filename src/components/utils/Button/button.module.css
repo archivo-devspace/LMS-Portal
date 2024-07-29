@@ -1,9 +1,1 @@
 
-
-.success {
-    @apply bg-success hover:text-light text-black
-}
-
-.primary {
-    @apply bg-default text-black
-}
