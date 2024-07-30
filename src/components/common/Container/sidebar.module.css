@@ -3,7 +3,7 @@
 }
 
 .topNavigation {
-   @apply bg-primaryStrongColor bg-primaryStrongColor p-0 h-12  w-full fixed shadow-md transition-all duration-500 ease-in-out;
+   @apply bg-primaryStrongColor p-0 h-12  w-full fixed shadow-md transition-all duration-500 ease-in-out;
 }
 
 .breadcrumb{
