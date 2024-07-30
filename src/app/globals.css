@@ -8,11 +8,11 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-secondary rounded-full;
+  @apply bg-activeColor rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-default;
+  @apply bg-activeColor;
 }
 
 ::-webkit-scrollbar-track {
@@ -29,12 +29,6 @@
 .theme {
   transition: 1s all ease;
 }
-
-
-
-
-
-
 
 
 :root {

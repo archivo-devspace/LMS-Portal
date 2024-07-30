@@ -3,20 +3,15 @@
 }
 
 .topNavigation {
-   @apply  p-0 h-12  w-full fixed shadow-md ;
-    background-color: var(--primary_strong-color);
-    transition: 1s all ease;
+   @apply bg-primaryStrongColor bg-primaryStrongColor p-0 h-12  w-full fixed shadow-md transition-all duration-500 ease-in-out;
 }
 
 .breadcrumb{
-    color: var(--text-color);
-    background-color: var(--primary-color);
-    transition: 1s all ease;
+   @apply text-textColor bg-primaryColor transition-all duration-500 ease-in-out;
     }
 
 .active_breadcrumb {
-            color: var(--active-color);
-            
+    @apply text-activeColor;        
 }
 
 .displayHidden {
@@ -28,14 +23,11 @@
 }
 
 .btnStyle {
-   @apply  ml-[74px] mt-2  w-5 h-7 flex justify-center items-center;
-    background-color: var(--active-color);
+   @apply bg-activeColor ml-[74px] mt-2  w-5 h-7 flex justify-center items-center;
 }
 
 .body {
-    @apply h-screen w-full flex;
-    background-color: var(--primary-color);
-    transition: 1s all ease;
+    @apply bg-primaryColor h-screen w-full flex transition-all duration-500 ease-in-out;
 }
 
 .sidebar {
@@ -47,10 +39,7 @@
 } */
 
 .logo{
-    @apply w-full flex justify-center shadow-md gap-4 items-center absolute h-12 rounded-tr-lg border-r-[1px];
-    border-color: var(--active-color);
-    background-color: var(--primary-color);
-    transition: 1s all ease;
+    @apply border-activeColor bg-primaryColor w-full flex justify-center shadow-md gap-4 items-center absolute h-12 rounded-tr-lg border-r-[1px] transition-all duration-500 ease-in-out;
 }
 
 .title {
@@ -58,65 +47,47 @@
 }
 
 .customBtn{
-    @apply mt-1  w-5 h-7  justify-center items-center;
-    background-color: var(--active-color);
-     transition: 1s all ease;
+    @apply bg-activeColor mt-1  w-5 h-7  justify-center items-center transition-all duration-500 ease-in-out;
 }
 
 .menu {
-    @apply h-screen relative overflow-y-auto overflow-x-hidden my-12;
-    background-color: var(--primary_strong-color);
-  
-            transition: 0.7s all ease;
-        
-    
+    @apply bg-primaryStrongColor h-screen relative overflow-y-auto overflow-x-hidden my-12 transition-all duration-500 ease-in-out;
 }
 
 
 
 .children{
-    @apply mx-2.5  mb-2  mt-[95px] w-full  overflow-auto shadow-md rounded-lg px-2 ;
-    background-color: var(--primary_weak-color);
-    
-  transition: 1s all ease;
-
+    @apply bg-primaryWeakColor mx-2.5  mb-2  mt-[95px] w-full  overflow-auto shadow-md rounded-lg px-2 transition-all duration-500 ease-in-out;
 }
 
 .sidebar_footer{
-    @apply bottom-0 w-full flex justify-center  text-white items-center absolute h-12 rounded-br-lg border-r-[1px];
-    border-color: var(--active-color);
-    background-color: var(--primary-color);
-     transition: 1s all ease;
+    @apply border-activeColor bg-primaryColor bottom-0 w-full flex justify-center  items-center absolute h-12 rounded-br-lg border-r-[1px] transition-all duration-500 ease-in-out;
 }
 
 .submenu {
-    @apply py-1 border-r-[1.5px];
-    border-color:var(--primary_strong-color); ;
-    background-color: var(--primary-color);
-     transition: 1s all ease;
-
+    @apply border-primaryStrongColor bg-primaryColor py-1 border-r-[1.5px] transition-all duration-500 ease-in-out;
     }
 
 .active_text {
-    color: var(--active-color);
+    @apply text-activeColor;
 }
 
 .active_bg {
-    background-color: var(--active-color);
+    @apply bg-activeColor;
 }
 
 .text {
-    color: var(--text-color);
+    @apply text-textColor
 }
 
 .text_dark {
-    color: var(--primary_weak-color);
+    @apply text-primaryWeakColor;
 }
 
 .submenu_link_hover:hover {
-    color: var(--active-color);
+    @apply text-activeColor
 }
 
 .active_submenu_link_hover:hover {
-    color: var(--text-color);
+    @apply text-textColor
 }

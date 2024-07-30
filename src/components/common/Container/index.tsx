@@ -1,6 +1,6 @@
 "use client";
 
-import { Breadcrumb, Divider, Layout, Menu, Spin } from "antd";
+import { Breadcrumb, Divider, Layout, Menu, Spin, Tooltip } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useCallback, useEffect, useState } from "react";
@@ -266,43 +266,49 @@ const Container = ({ children }: Props) => {
                     </div>
                   </SubMenu>
                 ) : (
-                  <div
-                    key={menu.syskey}
-                    className={`my-1 ${
-                      collapsed ? "flex justify-center" : "pl-1"
-                    } ${
-                      pathname === menu.router
-                        ? collapsed
-                          ? ""
-                          : `${styles.active_bg} `
-                        : ""
-                    }`}
+                  <Tooltip
+                    placement="rightTop"
+                    title={collapsed ? menu.name : ""}
+                    arrow={true}
                   >
-                    <Link
-                      href={menu.router}
-                      className={`gap-2 flex px-5 justify-start py-3 `}
+                    <div
+                      key={menu.syskey}
+                      className={`my-1 ${
+                        collapsed ? "flex justify-center" : "pl-1"
+                      } ${
+                        pathname === menu.router
+                          ? collapsed
+                            ? ""
+                            : `${styles.active_bg} `
+                          : ""
+                      }`}
                     >
-                      <Icon
-                        name={menu.icon}
-                        style={` ${
-                          pathname === menu.router
-                            ? collapsed
-                              ? styles.active_text
-                              : styles.text_dark
-                            : styles.text
-                        }`}
-                      />
-                      <span
-                        className={` ${
-                          pathname === menu.router
-                            ? styles.text_dark
-                            : styles.text
-                        } $} ${collapsed ? "hidden" : ""} text-sm`}
+                      <Link
+                        href={menu.router}
+                        className={`gap-2 flex px-5 justify-start py-3 `}
                       >
-                        {menu.name}
-                      </span>
-                    </Link>
-                  </div>
+                        <Icon
+                          name={menu.icon}
+                          style={` ${
+                            pathname === menu.router
+                              ? collapsed
+                                ? styles.active_text
+                                : styles.text_dark
+                              : styles.text
+                          }`}
+                        />
+                        <span
+                          className={` ${
+                            pathname === menu.router
+                              ? styles.text_dark
+                              : styles.text
+                          } $} ${collapsed ? "hidden" : ""} text-sm`}
+                        >
+                          {menu.name}
+                        </span>
+                      </Link>
+                    </div>
+                  </Tooltip>
                 )
               )}
             </Menu>
