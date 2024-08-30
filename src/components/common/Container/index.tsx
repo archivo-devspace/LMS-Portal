@@ -72,20 +72,20 @@ const menus: MenusProps[] = [
 
   {
     id: "4",
-    name: "Products",
-    router: "/products",
+    name: "Supplies",
+    router: "/supplies",
     icon: "products",
     submenu: [
       {
         id: "1",
         name: "Products",
-        router: "/products",
+        router: "/supplies/products",
         icon: "products",
       },
       {
         id: "2",
         name: "Category",
-        router: "/categories",
+        router: "/supplies/categories",
         icon: "categories",
       },
     ],
