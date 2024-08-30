@@ -11,13 +11,14 @@ import Icon, { IconState } from "@/components/utils/Icon";
 import Switch from "@/components/utils/Switch/indext";
 import { useThemeContext } from "@/contexts/ThemeContext";
 import { save } from "@/utils/storage";
+import DynamicBreadcrumb from "../Breadcrumb";
 
 type Props = {
   children: React.ReactNode;
 };
 
 type MenusProps = {
-  syskey: string;
+  id: string;
   name: string;
   router: string;
   icon: string;
@@ -25,7 +26,7 @@ type MenusProps = {
 };
 
 type SubMenusProps = {
-  syskey: string;
+  id: string;
   name: string;
   router: string;
   icon: string;
@@ -33,7 +34,7 @@ type SubMenusProps = {
 
 const menus: MenusProps[] = [
   {
-    syskey: "1",
+    id: "1",
     name: "Dashboard",
     router: "/",
     icon: "dashboard",
@@ -41,28 +42,28 @@ const menus: MenusProps[] = [
   },
 
   {
-    syskey: "2",
+    id: "2",
     name: "Settings",
     router: "/settings",
     icon: "setting",
     submenu: [
       {
-        syskey: "2-1",
+        id: "1",
         name: "Profile",
-        router: "/profile",
+        router: "/setting/profile",
         icon: "profile",
       },
       {
-        syskey: "2-2",
+        id: "2",
         name: "Security",
-        router: "/security",
+        router: "/setting/security",
         icon: "security",
       },
     ],
   },
 
   {
-    syskey: "3",
+    id: "3",
     name: "Reports",
     router: "/reports",
     icon: "reports",
@@ -70,19 +71,19 @@ const menus: MenusProps[] = [
   },
 
   {
-    syskey: "4",
+    id: "4",
     name: "Products",
     router: "/products",
     icon: "products",
     submenu: [
       {
-        syskey: "4-1",
+        id: "1",
         name: "Products",
         router: "/products",
         icon: "products",
       },
       {
-        syskey: "4-2",
+        id: "2",
         name: "Category",
         router: "/categories",
         icon: "categories",
@@ -90,7 +91,7 @@ const menus: MenusProps[] = [
     ],
   },
   {
-    syskey: "5",
+    id: "5",
     name: "Reports",
     router: "/reports",
     icon: "reports",
@@ -164,13 +165,14 @@ const Container = ({ children }: Props) => {
             collapsed ? "pl-20" : "pl-52"
           } `}
         >
-          <Breadcrumb style={{ margin: "8px 4px" }}>
+          {/* <Breadcrumb style={{ margin: "8px 4px" }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>List</Breadcrumb.Item>
             <Breadcrumb.Item className={styles.active_breadcrumb}>
               App
             </Breadcrumb.Item>
-          </Breadcrumb>
+          </Breadcrumb> */}
+          <DynamicBreadcrumb />
         </div>
 
         <div className={styles.body}>
@@ -203,7 +205,7 @@ const Container = ({ children }: Props) => {
               {menus.map((menu) =>
                 menu.submenu ? (
                   <SubMenu
-                    key={menu.syskey}
+                    key={menu.id}
                     title={
                       <span
                         className={` ${collapsed ? "pl-1" : ""}  ${
@@ -240,7 +242,7 @@ const Container = ({ children }: Props) => {
                       {menu.submenu.map((submenu) => (
                         <Link
                           href={submenu.router}
-                          key={submenu.syskey}
+                          key={submenu.id}
                           className={`flex ${
                             styles.submenu_link_hover
                           } py-2.5 pl-8 my-1.5 text-xs ${
@@ -272,7 +274,7 @@ const Container = ({ children }: Props) => {
                     arrow={true}
                   >
                     <div
-                      key={menu.syskey}
+                      key={menu.id}
                       className={`my-1 ${
                         collapsed ? "flex justify-center" : "pl-1"
                       } ${

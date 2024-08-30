@@ -1,0 +1,17 @@
+.active_breadcrumb {
+    @apply text-activeColor cursor-default font-semibold
+}
+
+.disabled_breadcrumb {
+    @apply text-secondaryStrongColor
+}
+
+/* style= {
+        {
+        margin: "8px 4px", co
+    }
+} */
+
+.breadcrumb {
+    @apply ml-2 mt-2 
+}
