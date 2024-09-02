@@ -161,8 +161,10 @@ const Container = ({ children }: Props) => {
           </div>
         </div>
         <div
-          className={`${styles.breadcrumb} h-8 mt-[52px] w-full fixed  ${
-            collapsed ? "pl-20" : "pl-52"
+          className={`${
+            styles.breadcrumb
+          } h-14 mt-[50px] w-full fixed flex items-center  ${
+            collapsed ? "pl-[70px]" : "pl-[200px]"
           } `}
         >
           {/* <Breadcrumb style={{ margin: "8px 4px" }}>

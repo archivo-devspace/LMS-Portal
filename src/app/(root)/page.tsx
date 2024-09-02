@@ -3,8 +3,11 @@
 
 import Button from "@/components/utils/Button";
 import styles from "./styles.module.css";
+import { useThemeContext } from "@/contexts/ThemeContext";
 
 export default function Home() {
+  const { theme } = useThemeContext();
+  console.log("theme: ", theme);
   return (
     <>
       <Button btnType="primary" btnLabel="Testing" htmlType="button" />
