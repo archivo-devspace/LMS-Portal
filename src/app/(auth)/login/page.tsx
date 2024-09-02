@@ -69,7 +69,7 @@ const Login = () => {
                 { required: true, message: "Please input your Password!" },
               ]}
             >
-              <Input
+              <Input.Password
                 prefix={<LockOutlined />}
                 type="password"
                 placeholder="Password"
