@@ -44,7 +44,7 @@ const Login = () => {
         <div className="form-container">
           <Form
             name="login"
-            className="w-full bg-successColor"
+            className="w-full"
             initialValues={{ remember: true }}
             wrapperCol={{ span: 24 }}
             onFinish={onFinish}
@@ -55,7 +55,8 @@ const Login = () => {
 
             <Form.Item
               name="username"
-              className=" md:w-[70%]"
+              className=" sm:w-[75%]  w-[80%] "
+              wrapperCol={{ span: 24 }}
               rules={[
                 { required: true, message: "Please input your Username!" },
               ]}
@@ -64,7 +65,8 @@ const Login = () => {
             </Form.Item>
             <Form.Item
               name="password"
-              className=" md:w-[70%]"
+              className=" sm:w-[75%] w-[80%]"
+              wrapperCol={{ span: 24 }}
               rules={[
                 { required: true, message: "Please input your Password!" },
               ]}
