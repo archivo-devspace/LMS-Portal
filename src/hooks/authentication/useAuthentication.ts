@@ -1,18 +1,20 @@
-// src/hooks/useAuthentication.ts
-import { useMutation, useQueryClient, UseMutationResult } from '@tanstack/react-query';
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { login, register } from '@/api/authentication';
+import { save } from '@/utils/storage';
 
 
 
-// Define the useAuthentication hook
+
 export const useAuthentication = () => {
   const queryClient = useQueryClient();
 
-  // Login mutation
+  
   const loginMutation = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
       console.log('Login successful:', data);
+      save(process.env.NEXT_PUBLIC_USER_ACCESS_TOKEN as string, data.accessToken)
       queryClient.invalidateQueries({ queryKey: ['user'] });
     },
     onError: (error) => {
@@ -21,7 +23,7 @@ export const useAuthentication = () => {
     
   });
 
-  // Register mutation
+
   const registerMutation = useMutation({
     mutationFn: register,
     onSuccess: (data) => {
@@ -33,18 +35,16 @@ export const useAuthentication = () => {
     },
   });
 
-  // Grouping login-related functionality
+
   const loginActions = {
     login: loginMutation.mutate,
-    isLoggingIn: loginMutation.isLoading ,
-    loginError: loginMutation.error,
+    login_status: loginMutation.status ,
   };
 
-  // Grouping register-related functionality
+
   const registerActions = {
     register: registerMutation.mutate,
-    isRegistering: registerMutation.isLoading,
-    registerError: registerMutation.error,
+    register_status: registerMutation.isPending,
   };
 
   return { loginActions, registerActions };

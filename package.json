@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.54.1",
+    "@types/js-cookie": "^3.0.6",
     "antd": "^5.19.3",
     "axios": "^1.7.7",
+    "js-cookie": "^3.0.5",
     "next": "14.2.5",
     "next-videos": "^1.4.1",
     "react": "^18",

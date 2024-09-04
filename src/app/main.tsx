@@ -3,9 +3,12 @@
 import { useThemeContext } from "@/contexts/ThemeContext";
 import { Colors } from "@/theme";
 import React, { useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 
 const Main = ({ children }: { children: React.ReactNode }) => {
   const { theme } = useThemeContext();
+  const queryClient = new QueryClient();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -25,7 +28,11 @@ const Main = ({ children }: { children: React.ReactNode }) => {
     root.style.setProperty("--danger-color", colors.danger);
   }, [theme]);
 
-  return <>{children}</>;
+  return <>
+  <QueryClientProvider client={queryClient}>
+  {children}
+  </QueryClientProvider>
+  </>;
 };
 
 export default Main;

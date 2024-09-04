@@ -2,35 +2,34 @@
 
 import { useThemeContext } from "@/contexts/ThemeContext";
 import React from "react";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { LockOutlined, MailOutlined  } from "@ant-design/icons";
 import type { FormProps } from "antd";
 import { Card, Checkbox, Flex, Form, Input } from "antd";
 import "./login.css";
 import Button from "@/components/utils/Button";
+import { useAuthentication } from "@/hooks/authentication/useAuthentication";
 
 const Login = () => {
   const { theme, setTheme } = useThemeContext();
+  const { loginActions } = useAuthentication();
 
   console.log("theme", theme);
 
   type FieldType = {
-    username?: string;
-    password?: string;
-    remember?: string;
+    email: string;
+    password: string;
   };
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     console.log("Success:", values);
-  };
+    loginActions.login({email:values.email, password: values.password})
+  };  
 
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
-    errorInfo
-  ) => {
-    console.log("Failed:", errorInfo);
-  };
+ 
 
   return (
     <>
+      <div className="main">
       <div className="container">
         <div className="toggle-container">
           <div className="toggle">
@@ -48,20 +47,22 @@ const Login = () => {
             initialValues={{ remember: true }}
             wrapperCol={{ span: 24 }}
             onFinish={onFinish}
+           
           >
             <Form.Item>
               <h1 className="title">Log In</h1>
             </Form.Item>
 
             <Form.Item
-              name="username"
+              name="email"
               className=" sm:w-[75%]  w-[80%] "
               wrapperCol={{ span: 24 }}
               rules={[
-                { required: true, message: "Please input your Username!" },
+                { required: true, message: "Please input your email!" },
+                {type : "email" , message: "Please enter valid email!"}
               ]}
             >
-              <Input prefix={<UserOutlined />} placeholder="Username" />
+              <Input prefix={<MailOutlined />} placeholder="Username" />
             </Form.Item>
             <Form.Item
               name="password"
@@ -69,6 +70,7 @@ const Login = () => {
               wrapperCol={{ span: 24 }}
               rules={[
                 { required: true, message: "Please input your Password!" },
+                { min: 8, message:"Password must be 8 characters!"},
               ]}
             >
               <Input.Password
@@ -82,10 +84,11 @@ const Login = () => {
               {/* <Button block type="primary" htmlType="submit">
                 Log in
               </Button> */}
-              <Button btnType="primary" btnLabel="Log In" htmlType="submit" />
+              <Button btnType="text" btnLabel="Log In" htmlType="submit" />
             </Form.Item>
           </Form>
         </div>
+      </div>
       </div>
       <video
         src={require("../../../../public/backgroundvideos/gold.mp4")}
