@@ -30,7 +30,6 @@
   transition: 1s all ease;
 }
 
-
 :root {
   --primary-color: "#8b9dc3";
   --primary_weak-color: "#dfe3ee";
@@ -43,6 +42,4 @@
   --success-color: "#00C88C";
   --warnning-color: "#8000C8";
   --danger-color: "#C8001A";
- 
 }
-
