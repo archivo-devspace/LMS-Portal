@@ -204,35 +204,33 @@ const Container = ({ children }: Props) => {
               mode="inline"
               theme="dark"
             >
-              {menus.map((menu) =>
-                menu.submenu ? (
+              {menus.map((menu) => {
+                const isActiveParentMenu = isParentMenuActive(menu);
+
+                return menu.submenu ? (
                   <SubMenu
-                    key={menu.id}
+                    key={menu.id} // Ensure each SubMenu has a unique key
                     title={
                       <span
-                        className={` ${collapsed ? "pl-1" : ""}  ${
-                          isParentMenuActive(menu)
-                            ? `${styles.active_text}`
-                            : ""
+                        className={` ${collapsed ? "pl-1" : ""} ${
+                          isActiveParentMenu ? `${styles.active_text}` : ""
                         }`}
                       >
                         <Icon
                           name={menu.icon}
                           style={`${
-                            isParentMenuActive(menu)
+                            isActiveParentMenu
                               ? styles.active_text
                               : styles.text
                           }`}
                         />
-                        {collapsed ? (
-                          <></>
-                        ) : (
+                        {!collapsed && (
                           <span
-                            className={` ${collapsed ? "hidden" : ""} text-sm ${
-                              isParentMenuActive(menu)
+                            className={`text-sm ${
+                              isActiveParentMenu
                                 ? `${styles.active_text}`
                                 : `${styles.text}`
-                            } `}
+                            }`}
                           >
                             {menu.name}
                           </span>
@@ -244,7 +242,7 @@ const Container = ({ children }: Props) => {
                       {menu.submenu.map((submenu) => (
                         <Link
                           href={submenu.router}
-                          key={submenu.id}
+                          key={`${menu.id}-${submenu.id}`} // Ensure unique key for each Link
                           className={`flex ${
                             styles.submenu_link_hover
                           } py-2.5 pl-8 my-1.5 text-xs ${
@@ -256,11 +254,11 @@ const Container = ({ children }: Props) => {
                           <div className="flex gap-2">
                             <Icon name={submenu.icon} />
                             <span
-                              className={`text-sm text ${
+                              className={`text-sm ${
                                 pathname === submenu.router
                                   ? ""
                                   : `${styles.submenu_link_hover}`
-                              } `}
+                              }`}
                             >
                               {submenu.name}
                             </span>
@@ -271,12 +269,12 @@ const Container = ({ children }: Props) => {
                   </SubMenu>
                 ) : (
                   <Tooltip
+                    key={menu.id} // Ensure each Tooltip has a unique key
                     placement="rightTop"
                     title={collapsed ? menu.name : ""}
                     arrow={true}
                   >
                     <div
-                      key={menu.id}
                       className={`my-1 ${
                         collapsed ? "flex justify-center" : "pl-1"
                       } ${
@@ -289,7 +287,7 @@ const Container = ({ children }: Props) => {
                     >
                       <Link
                         href={menu.router}
-                        className={`gap-2 flex px-5 justify-start py-3 `}
+                        className={`gap-2 flex px-5 justify-start py-3`}
                       >
                         <Icon
                           name={menu.icon}
@@ -306,15 +304,15 @@ const Container = ({ children }: Props) => {
                             pathname === menu.router
                               ? styles.text_dark
                               : styles.text
-                          } $} ${collapsed ? "hidden" : ""} text-sm`}
+                          } ${collapsed ? "hidden" : ""} text-sm`}
                         >
                           {menu.name}
                         </span>
                       </Link>
                     </div>
                   </Tooltip>
-                )
-              )}
+                );
+              })}
             </Menu>
             <div className={styles.sidebar_footer}>
               {collapsed ? (
