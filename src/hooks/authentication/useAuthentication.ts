@@ -1,7 +1,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { login, register } from '@/api/authentication';
-import { save } from '@/utils/storage';
+import Cookies from 'js-cookie';
 
 
 
@@ -14,7 +14,7 @@ export const useAuthentication = () => {
     mutationFn: login,
     onSuccess: (data) => {
       console.log('Login successful:', data);
-      save(process.env.NEXT_PUBLIC_USER_ACCESS_TOKEN as string, data.accessToken)
+      Cookies.set(process.env.NEXT_PUBLIC_USER_ACCESS_TOKEN as string, data.accessToken)
       queryClient.invalidateQueries({ queryKey: ['user'] });
     },
     onError: (error) => {

@@ -1,18 +1,15 @@
-
 import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-const USER_TOKEN_KEY = process.env.NEXT_PUBLIC_USER_ACCESS_TOKEN as string
-const REFRESH_TOKEN_KEY = process.env.NEXT_PUBLIC_USER_REFRESH_TOKEN as string
+const USER_TOKEN_KEY = process.env.NEXT_PUBLIC_USER_ACCESS_TOKEN as string;
+const REFRESH_TOKEN_KEY = process.env.NEXT_PUBLIC_USER_REFRESH_TOKEN as string;
 
-// Create an Axios instance
+// Create an Axios instance with credentials included
 const apiInstance: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   timeout: 180000, // 3 mins
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  withCredentials: true, // Include cookies in requests
 });
 
 // Function to set authorization token
@@ -35,9 +32,11 @@ const refreshAccessToken = async (): Promise<string | null> => {
   }
 
   try {
-    const response: AxiosResponse<{ accessToken: string }> = await axios.post(`${BASE_URL}/users/refresh-token`, {
-      refreshToken,
-    });
+    const response: AxiosResponse<{ accessToken: string }> = await axios.post(
+      `${BASE_URL}/users/refresh-token`,
+      { refreshToken },
+      { withCredentials: true } // Ensure credentials are included when refreshing the token
+    );
 
     const newAccessToken = response.data.accessToken;
     Cookies.set(USER_TOKEN_KEY, newAccessToken); // Update the access token in cookies
