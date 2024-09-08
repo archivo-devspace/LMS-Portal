@@ -16,6 +16,7 @@ const apiInstance: AxiosInstance = axios.create({
 const setAuthToken = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
   const token = Cookies.get(USER_TOKEN_KEY);
 
+
   if (token && config.headers) {
     config.headers['Authorization'] = `Bearer ${token}`;
   }
@@ -26,6 +27,8 @@ const setAuthToken = (config: InternalAxiosRequestConfig): InternalAxiosRequestC
 // Function to refresh the access token
 const refreshAccessToken = async (): Promise<string | null> => {
   const refreshToken = Cookies.get(REFRESH_TOKEN_KEY);
+const token = Cookies.get(USER_TOKEN_KEY);
+  console.log("refresh token: " , refreshToken)
 
   if (!refreshToken) {
     return null;
@@ -55,6 +58,8 @@ apiInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+
+    console.log("errorStatus", error.response.status);
 
     // Check if error is due to unauthorized access and retry is not set
     if (error.response?.status === 401 && !originalRequest._retry) {

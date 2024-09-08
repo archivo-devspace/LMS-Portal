@@ -1,10 +1,30 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { login, register } from "@/api/authentication";
+"use client"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getLoginProfile, login, register } from "@/api/authentication";
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
+
+
+export interface UserProfile {
+  id: number; 
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: String;
+  status: String;
+  updatedAt: String;
+  createdAt: String;
+}
+
+
 
 export const useAuthentication = () => {
   const queryClient = useQueryClient();
+
+    const loginUserQuery = useQuery<UserProfile>({
+    queryKey: ["user"],
+      queryFn: getLoginProfile,
+     enabled : !!Cookies.get(process.env.NEXT_PUBLIC_USER_ACCESS_TOKEN as string)
+  })
 
   const loginMutation = useMutation({
     mutationFn: login,
@@ -33,6 +53,8 @@ export const useAuthentication = () => {
     },
   });
 
+
+
   const loginActions = {
     login: loginMutation.mutate,
     login_data: loginMutation.data,
@@ -46,6 +68,8 @@ export const useAuthentication = () => {
     register_status: registerMutation.isPending,
     register_error: registerMutation.error,
   };
+ 
+  
 
-  return { loginActions, registerActions };
+  return { loginActions, registerActions, loginUserQuery  };
 };

@@ -45,3 +45,12 @@ export const register = async ({
     handleApiError(error, "An error occurred during registration");
   }
 };
+
+export const getLoginProfile = async () => {
+  try {
+    const response = await apiInstance.get('/users/userProfile');
+    return response.data.user;
+  } catch (error) {
+    handleApiError(error, "An error occurred while fetching user profile");
+  }
+}
