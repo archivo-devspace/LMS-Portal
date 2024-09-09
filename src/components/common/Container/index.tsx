@@ -170,7 +170,7 @@ const Container = ({ children }: Props) => {
             /> */}
             <Icon
               name={IconState.Poweroff}
-              onClick={toggleCollapsed}
+              onClick={logout}
               style={styles.powerOff}
             />
           </div>
