@@ -14,6 +14,7 @@ import {
   BarChartOutlined,
   RightOutlined,
   LeftOutlined,
+  PoweroffOutlined,
 } from "@ant-design/icons";
 
 import React from "react";
@@ -40,6 +41,7 @@ export enum IconState {
   Statistics = "statistics",
   Right = "right",
   Left = "left",
+  Poweroff = "poweroff",
 }
 
 const Icon = ({ name, onClick, style }: IconProps) => {
@@ -74,6 +76,8 @@ const Icon = ({ name, onClick, style }: IconProps) => {
       return <RightOutlined onClick={onClick} className={style} />;
     case IconState.Left:
       return <LeftOutlined onClick={onClick} className={style} />;
+    case IconState.Poweroff:
+      return <PoweroffOutlined onClick={onClick} className={style} />;
       return null;
   }
 };

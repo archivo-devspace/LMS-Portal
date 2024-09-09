@@ -1,93 +1,95 @@
 .container {
-   @apply h-screen relative flex flex-col 
+  @apply h-screen relative flex flex-col;
 }
 
 .topNavigation {
-   @apply bg-primaryStrongColor p-0 h-12  w-full fixed shadow-md transition-all duration-500 ease-in-out;
+  @apply bg-primaryStrongColor p-0 h-12  w-full fixed shadow-md transition-all duration-500 ease-in-out;
 }
 
-.breadcrumb{
-   @apply text-textColor bg-primaryColor transition-all duration-500 ease-in-out;
-    }
+.breadcrumb {
+  @apply text-textColor bg-primaryColor transition-all duration-500 ease-in-out;
+}
 
 .active_breadcrumb {
-    @apply text-activeColor;        
+  @apply text-activeColor;
 }
 
 .displayHidden {
-    @apply hidden;
+  @apply hidden;
 }
 
 .displayBlock {
-    @apply block
+  @apply block;
 }
 
 .btnStyle {
-   @apply bg-activeColor ml-[74px] mt-2  w-5 h-7 flex justify-center items-center;
+  @apply bg-activeColor ml-[74px] mt-2  w-5 h-7 flex justify-center items-center;
 }
 
 .body {
-    @apply bg-primaryColor h-screen w-full flex transition-all duration-500 ease-in-out;
+  @apply bg-primaryColor h-screen w-full flex transition-all duration-500 ease-in-out;
 }
 
 .sidebar {
-    @apply relative flex flex-col 
+  @apply relative flex flex-col;
 }
 
 /* .logo {
     @apply h-14 relative shadow-md bg-primary flex justify-center gap-4 items-center pr-1 rounded-tr-lg border-r-[1px] border-gray-300
 } */
 
-.logo{
-    @apply border-activeColor bg-primaryColor w-full flex justify-center shadow-md gap-4 items-center absolute h-12 rounded-tr-lg border-r-[1px] transition-all duration-500 ease-in-out;
+.logo {
+  @apply border-activeColor bg-primaryColor w-full flex justify-center shadow-md gap-4 items-center absolute h-12 rounded-tr-lg border-r-[1px] transition-all duration-500 ease-in-out;
 }
 
 .title {
-    @apply text-xs font-semibold truncate 
+  @apply text-xs font-semibold truncate;
 }
 
-.customBtn{
-    @apply bg-activeColor mt-1  w-5 h-7  justify-center items-center transition-all duration-500 ease-in-out;
+.customBtn {
+  @apply bg-activeColor mt-1  w-5 h-7  justify-center items-center transition-all duration-500 ease-in-out;
 }
 
 .menu {
-    @apply bg-primaryStrongColor h-screen relative overflow-y-auto overflow-x-hidden my-12 transition-all duration-500 ease-in-out;
+  @apply bg-primaryStrongColor h-screen relative overflow-y-auto overflow-x-hidden my-12 transition-all duration-500 ease-in-out;
 }
 
-
-
-.children{
-    @apply bg-primaryWeakColor mx-2.5  mb-2  mt-[110px] w-full  overflow-auto shadow-md rounded-lg px-2 transition-all duration-500 ease-in-out;
+.children {
+  @apply bg-primaryWeakColor mx-2.5  mb-2  mt-[110px] w-full  overflow-auto shadow-md rounded-lg px-2 transition-all duration-500 ease-in-out;
 }
 
-.sidebar_footer{
-    @apply border-activeColor bg-primaryColor bottom-0 w-full flex justify-center  items-center absolute h-12 rounded-br-lg border-r-[1px] transition-all duration-500 ease-in-out;
+.sidebar_footer {
+  @apply border-activeColor bg-primaryColor bottom-0 w-full flex justify-center  items-center absolute h-12 rounded-br-lg border-r-[1px] transition-all duration-500 ease-in-out;
 }
 
 .submenu {
-    @apply border-primaryStrongColor bg-primaryColor py-1 border-r-[1.5px] transition-all duration-500 ease-in-out;
-    }
+  @apply border-primaryStrongColor bg-primaryColor py-1 border-r-[1.5px] transition-all duration-500 ease-in-out;
+}
 
 .active_text {
-    @apply text-activeColor;
+  @apply text-activeColor;
 }
 
 .active_bg {
-    @apply bg-activeColor;
+  @apply bg-activeColor;
 }
 
 .text {
-    @apply text-textColor transition-all duration-500 ease-in-out;
+  @apply text-textColor transition-all duration-500 ease-in-out;
 }
 
 .text_dark {
-    @apply text-primaryWeakColor;
+  @apply text-primaryWeakColor;
 }
 
 .submenu_link_hover:hover {
-    @apply text-activeColor
+  @apply text-activeColor;
 }
 
 .active_submenu_link_hover:hover {
-    @apply text-textColor
+  @apply text-textColor;
+}
+
+.powerOff {
+  @apply text-dangerColor mx-4;
 }

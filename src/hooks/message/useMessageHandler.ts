@@ -7,6 +7,7 @@ interface MessageProps {
   conditionalType?: "success" | "error" | "warning";
   content?: string;
   duration?: number;
+  style?: any;
 }
 
 export const useMessageHandler = () => {
@@ -19,6 +20,7 @@ export const useMessageHandler = () => {
     conditionalType,
     content,
     duration,
+    style
   }: MessageProps) => {
     if (type === "loading") {
       if (isLoading) {
@@ -53,7 +55,7 @@ export const useMessageHandler = () => {
         }
       }
     } else {
-      messageApi.open({ type, content, duration });
+      messageApi.open({ type, content, duration, style });
     }
   };
 

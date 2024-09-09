@@ -2,6 +2,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getLoginProfile, login, register } from "@/api/authentication";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 
 export interface UserProfile {
@@ -20,10 +21,11 @@ export interface UserProfile {
 export const useAuthentication = () => {
   const queryClient = useQueryClient();
 
+
     const loginUserQuery = useQuery<UserProfile>({
     queryKey: ["user"],
       queryFn: getLoginProfile,
-    //  enabled : !!Cookies.get(process.env.NEXT_PUBLIC_USER_ACCESS_TOKEN as string)
+     enabled : !!Cookies.get(process.env.NEXT_PUBLIC_USER_ACCESS_TOKEN as string)
   })
 
   const loginMutation = useMutation({
@@ -41,6 +43,7 @@ export const useAuthentication = () => {
   
       queryClient.invalidateQueries({ queryKey: ["user"] });
       window.location.href = "/";
+     
     },
     onError: (error) => {
       console.error("Login failed:", error);
@@ -57,6 +60,14 @@ export const useAuthentication = () => {
       console.error("Registration failed:", error);
     },
   });
+
+
+   const logout = () => {
+    Cookies.remove(process.env.NEXT_PUBLIC_USER_ACCESS_TOKEN as string);
+    Cookies.remove(process.env.NEXT_PUBLIC_USER_REFRESH_TOKEN as string);
+    queryClient.clear(); 
+    window.location.href = "/login"; 
+  };
 
 
 
@@ -76,5 +87,5 @@ export const useAuthentication = () => {
  
   
 
-  return { loginActions, registerActions, loginUserQuery  };
+  return { loginActions, registerActions, loginUserQuery, logout  };
 };

@@ -5,11 +5,10 @@ import { Colors } from "@/theme";
 import React, { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-
 const Main = ({ children }: { children: React.ReactNode }) => {
   const { theme } = useThemeContext();
   const queryClient = new QueryClient({
-    defaultOptions: { queries: { staleTime: 1000 * 40 } }, // 10 seconds
+    defaultOptions: { queries: { staleTime: 1000 * 10 } }, // 10 seconds
   });
 
   useEffect(() => {
@@ -30,11 +29,11 @@ const Main = ({ children }: { children: React.ReactNode }) => {
     root.style.setProperty("--danger-color", colors.danger);
   }, [theme]);
 
-  return <>
-  <QueryClientProvider client={queryClient}>
-  {children}
-  </QueryClientProvider>
-  </>;
+  return (
+    <>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </>
+  );
 };
 
 export default Main;

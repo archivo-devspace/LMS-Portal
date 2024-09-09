@@ -12,6 +12,8 @@ import Switch from "@/components/utils/Switch/indext";
 import { useThemeContext } from "@/contexts/ThemeContext";
 import { save } from "@/utils/storage";
 import DynamicBreadcrumb from "../Breadcrumb";
+import Cookies from "js-cookie";
+import { useAuthentication } from "@/hooks/authentication/useAuthentication";
 
 type Props = {
   children: React.ReactNode;
@@ -104,6 +106,7 @@ const { SubMenu } = Menu;
 const Container = ({ children }: Props) => {
   const [collapsed, setCollapsed] = useState(true);
   const [isEnabled, setIsEnabled] = useState<boolean>(false);
+  const { logout } = useAuthentication();
 
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
@@ -158,6 +161,18 @@ const Container = ({ children }: Props) => {
               btnIcon={<Icon name={IconState.Logout} />}
             /> */}
             <Switch value={isEnabled} onHandleSwitch={onHandleSwitch} />
+            {/* <Button
+              btnLabel="Logout"
+              btnType="dashed"
+              htmlType="button"
+              handleClick={logout}
+              
+            /> */}
+            <Icon
+              name={IconState.Poweroff}
+              onClick={toggleCollapsed}
+              style={styles.powerOff}
+            />
           </div>
         </div>
         <div

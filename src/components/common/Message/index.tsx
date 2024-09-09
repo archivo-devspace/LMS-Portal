@@ -1,40 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, message, Space } from "antd";
 
-const App: React.FC = () => {
+interface MessageHandlerProps {
+  type: "success" | "error" | "warning";
+  content: string;
+  key: string;
+}
+
+const Message = ({ type, content, key }: MessageHandlerProps) => {
   const [messageApi, contextHolder] = message.useMessage();
 
-  const success = () => {
-    messageApi.open({
-      type: "success",
-      content: "This is a success message",
-    });
-  };
+  useEffect(() => {
+    messageApi.open({ type, content, key });
+    return () => messageApi.destroy(key);
+  }, [key, type, content]);
 
-  const error = () => {
-    messageApi.open({
-      type: "error",
-      content: "This is an error message",
-    });
-  };
-
-  const warning = () => {
-    messageApi.open({
-      type: "warning",
-      content: "This is a warning message",
-    });
-  };
-
-  return (
-    <>
-      {contextHolder}
-      <Space>
-        <Button onClick={success}>Success</Button>
-        <Button onClick={error}>Error</Button>
-        <Button onClick={warning}>Warning</Button>
-      </Space>
-    </>
-  );
+  return <>{contextHolder}</>;
 };
 
-export default App;
+export default Message;

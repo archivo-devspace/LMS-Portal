@@ -2,29 +2,36 @@
 
 import { useAuthentication } from "@/hooks/authentication/useAuthentication";
 import React from "react";
-import Cookies from "js-cookie";
-
-const REFRESH_TOKEN_KEY = process.env.NEXT_PUBLIC_USER_REFRESH_TOKEN as string;
+import Message from "@/components/common/Message";
 
 const Profile = () => {
   const { loginUserQuery } = useAuthentication();
-
-  const refreshToken = Cookies.get("USER_REFRESH_TOKEN");
-  console.log("refresh token >>", refreshToken);
-
-  console.log("data", loginUserQuery.data);
 
   if (loginUserQuery.status === "pending") {
     return <div>Loading...</div>;
   }
 
   if (loginUserQuery.status === "error") {
-    return <div>Error</div>;
+    return (
+      <>
+        <Message
+          key="get_login_user"
+          type="error"
+          content={loginUserQuery.error.message}
+        />
+        <div>{loginUserQuery.error.message}</div>
+      </>
+    );
   }
 
   if (loginUserQuery.status === "success") {
-    return <div>{loginUserQuery.data.email}</div>;
+    return (
+      <>
+        <div>{loginUserQuery?.data?.email}</div>
+      </>
+    );
   }
+  return null;
 };
 
 export default Profile;
