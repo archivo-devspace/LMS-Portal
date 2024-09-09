@@ -23,7 +23,7 @@ export const useAuthentication = () => {
     const loginUserQuery = useQuery<UserProfile>({
     queryKey: ["user"],
       queryFn: getLoginProfile,
-     enabled : !!Cookies.get(process.env.NEXT_PUBLIC_USER_ACCESS_TOKEN as string)
+    //  enabled : !!Cookies.get(process.env.NEXT_PUBLIC_USER_ACCESS_TOKEN as string)
   })
 
   const loginMutation = useMutation({
@@ -32,8 +32,13 @@ export const useAuthentication = () => {
       console.log("Login successful:", data);
       Cookies.set(
         process.env.NEXT_PUBLIC_USER_ACCESS_TOKEN as string,
-        data.accessToken
+         data.accessToken
       );
+      Cookies.set(
+        process.env.NEXT_PUBLIC_USER_REFRESH_TOKEN as string,
+         data.refreshToken
+      );
+  
       queryClient.invalidateQueries({ queryKey: ["user"] });
       window.location.href = "/";
     },

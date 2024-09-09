@@ -8,7 +8,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const Main = ({ children }: { children: React.ReactNode }) => {
   const { theme } = useThemeContext();
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { staleTime: 1000 * 40 } }, // 10 seconds
+  });
 
   useEffect(() => {
     const root = document.documentElement;
