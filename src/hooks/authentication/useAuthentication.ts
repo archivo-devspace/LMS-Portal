@@ -1,12 +1,11 @@
-"use client"
+"use client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getLoginProfile, login, register } from "@/api/authentication";
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
-
+import { usePathname, useRouter } from "next/navigation";
 
 export interface UserProfile {
-  id: number; 
+  id: number;
   email: string;
   firstName: string;
   lastName: string;
@@ -16,17 +15,15 @@ export interface UserProfile {
   createdAt: String;
 }
 
-
-
 export const useAuthentication = () => {
   const queryClient = useQueryClient();
+  const pathNmae = usePathname();
 
-
-    const loginUserQuery = useQuery<UserProfile>({
+  const loginUserQuery = useQuery<UserProfile>({
     queryKey: ["user"],
-      queryFn: getLoginProfile,
-     enabled : !!Cookies.get(process.env.NEXT_PUBLIC_USER_ACCESS_TOKEN as string)
-  })
+    queryFn: getLoginProfile,
+    enabled: pathNmae === "/setting/profile",
+  });
 
   const loginMutation = useMutation({
     mutationFn: login,
@@ -34,16 +31,15 @@ export const useAuthentication = () => {
       console.log("Login successful:", data);
       Cookies.set(
         process.env.NEXT_PUBLIC_USER_ACCESS_TOKEN as string,
-         data.accessToken
+        data.accessToken
       );
       Cookies.set(
         process.env.NEXT_PUBLIC_USER_REFRESH_TOKEN as string,
-         data.refreshToken
+        data.refreshToken
       );
-  
+
       queryClient.invalidateQueries({ queryKey: ["user"] });
       window.location.href = "/";
-     
     },
     onError: (error) => {
       console.error("Login failed:", error);
@@ -61,15 +57,12 @@ export const useAuthentication = () => {
     },
   });
 
-
-   const logout = () => {
+  const logout = () => {
     Cookies.remove(process.env.NEXT_PUBLIC_USER_ACCESS_TOKEN as string);
     Cookies.remove(process.env.NEXT_PUBLIC_USER_REFRESH_TOKEN as string);
-    queryClient.clear(); 
-    window.location.href = "/login"; 
+    queryClient.clear();
+    window.location.href = "/login";
   };
-
-
 
   const loginActions = {
     login: loginMutation.mutate,
@@ -84,8 +77,6 @@ export const useAuthentication = () => {
     register_status: registerMutation.isPending,
     register_error: registerMutation.error,
   };
- 
-  
 
-  return { loginActions, registerActions, loginUserQuery, logout  };
+  return { loginActions, registerActions, loginUserQuery, logout };
 };
