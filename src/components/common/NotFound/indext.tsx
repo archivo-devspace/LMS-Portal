@@ -13,25 +13,27 @@ const NotFoundUi = () => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push("/");
+    router.back();
   };
 
   return (
     <div className="flex items-center justify-center h-[100vh] w-full bg-gray-50 p-4">
       <div className="flex flex-col items-center">
-        <Lottie
-          loop
-          animationData={notFoundAnimation}
-          play
-          className="w-full h-[80vh]"
-        />
+        <div className="w-full h-[80vh]">
+          <Lottie
+            loop
+            animationData={notFoundAnimation}
+            play
+            className="w-full h-[80vh]"
+          />
+        </div>
 
         {/* <Link href="/">
           <p className="text-blue-500 hover:underline">Return Home</p>
         </Link> */}
         <Button
           btnType="primary"
-          btnLabel="Return Home"
+          btnLabel="Back"
           btnVarient="default"
           handleClick={handleClick}
           htmlType="button"
